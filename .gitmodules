@@ -1,0 +1,9 @@
+[submodule "Assets/Scripts/unity-multitag"]
+	path = Assets/Scripts/unity-multitag
+	url = https://github.com/MCFX2/unity-multitag
+[submodule "Assets/Scripts/unity-interp"]
+	path = Assets/Scripts/unity-interp
+	url = https://github.com/MCFX2/unity-interp
+[submodule "Assets/Scripts/unity-loadfile"]
+	path = Assets/Scripts/unity-loadfile
+	url = https://github.com/MCFX2/unity-loadfile
