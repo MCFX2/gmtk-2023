@@ -12,6 +12,8 @@ public class PlayerBullet : MonoBehaviour
 
     private float _curVelocity = 0.0f;
 
+    [SerializeField] private List<EffectOnDash> dashEffects = new();
+    
     // [Header("Movement Settings")]
     [field: SerializeField] public float StartVelocity { get; private set; } = 1.0f;
     [SerializeField] private float velocityStep = 0.5f;
@@ -145,7 +147,11 @@ public class PlayerBullet : MonoBehaviour
             else
             {
                 // play boost feedback here
-            
+                foreach (var effect in dashEffects)
+                {
+                    effect.Fire();
+                }
+                
                 // adjust camera fov
                 UpdateCameraFov(true);
             

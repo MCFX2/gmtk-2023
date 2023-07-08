@@ -123,51 +123,22 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &276957114 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8490032829473315375, guid: 79b03f7bae55fd14eaf490111c9a0282, type: 3}
+--- !u!114 &202630144 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3587685485675735057, guid: 79b03f7bae55fd14eaf490111c9a0282, type: 3}
   m_PrefabInstance: {fileID: 2099330107114074636}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ea5caf89ae84284ab9a4adb31c4c8e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &276957115 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5958247545234968926, guid: 79b03f7bae55fd14eaf490111c9a0282, type: 3}
   m_PrefabInstance: {fileID: 2099330107114074636}
   m_PrefabAsset: {fileID: 0}
---- !u!58 &276957119
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 276957114}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.15, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.15
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1071,14 +1042,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3366550720096935993, guid: 79b03f7bae55fd14eaf490111c9a0282, type: 3}
-      propertyPath: m_Size.x
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3366550720096935993, guid: 79b03f7bae55fd14eaf490111c9a0282, type: 3}
-      propertyPath: m_Offset.x
-      value: -0.05
-      objectReference: {fileID: 0}
     - target: {fileID: 5958247545234968926, guid: 79b03f7bae55fd14eaf490111c9a0282, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1124,21 +1087,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8197808110563386774, guid: 79b03f7bae55fd14eaf490111c9a0282, type: 3}
-      propertyPath: maxFov
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8197808110563386774, guid: 79b03f7bae55fd14eaf490111c9a0282, type: 3}
-      propertyPath: baseFov
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8197808110563386774, guid: 79b03f7bae55fd14eaf490111c9a0282, type: 3}
-      propertyPath: velocityStep
+      propertyPath: dashEffects.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8197808110563386774, guid: 79b03f7bae55fd14eaf490111c9a0282, type: 3}
-      propertyPath: <MaxVelocity>k__BackingField
-      value: 10
-      objectReference: {fileID: 0}
+      propertyPath: dashEffects.Array.data[0]
+      value: 
+      objectReference: {fileID: 202630144}
     - target: {fileID: 8490032829473315375, guid: 79b03f7bae55fd14eaf490111c9a0282, type: 3}
       propertyPath: m_Name
       value: PlayerBullet
@@ -1146,8 +1101,5 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8490032829473315375, guid: 79b03f7bae55fd14eaf490111c9a0282, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 276957119}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79b03f7bae55fd14eaf490111c9a0282, type: 3}
