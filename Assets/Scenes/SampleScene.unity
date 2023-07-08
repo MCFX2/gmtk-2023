@@ -1724,6 +1724,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8197808110563386774, guid: 79b03f7bae55fd14eaf490111c9a0282, type: 3}
+      propertyPath: boostRatio
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8197808110563386774, guid: 79b03f7bae55fd14eaf490111c9a0282, type: 3}
       propertyPath: dashEffects.Array.size
       value: 1
       objectReference: {fileID: 0}

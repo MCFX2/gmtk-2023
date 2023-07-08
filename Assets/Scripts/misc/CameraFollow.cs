@@ -22,7 +22,7 @@ public class CameraFollow : MonoBehaviour
 
     public void Shake(float amount, float time, float spinAmt)
     {
-        if(curShakeAmt < amount)
+        if(curShakeAmt <= amount)
         {
             curShakeAmt = amount;
             curShakeTime = time;

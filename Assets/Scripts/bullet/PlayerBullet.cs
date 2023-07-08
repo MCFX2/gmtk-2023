@@ -24,6 +24,10 @@ public class PlayerBullet : MonoBehaviour
 
     [SerializeField] private float turnSpeed = 720.0f;
 
+    // how much boost speeds you up during the temporary window (0.5s)
+    [SerializeField] private float boostRatio = 3.0f;
+    private float boostTimeLeft = 0.0f;
+
     [Header("Camera Settings")]
     [SerializeField] private float baseFov = 5.0f;
 
@@ -34,7 +38,7 @@ public class PlayerBullet : MonoBehaviour
     [SerializeField] private Interp.Type fovScalingMethod = Interp.Type.Linear;
 
     [SerializeField] private float fovTransitionTime = 0.5f;
-    
+
     // used to keep track of the camera scaling coroutine so we can cancel it
     // if the user adjusts their speed again before the transition is finished
     private Coroutine _fovCoroutine;
@@ -101,6 +105,7 @@ public class PlayerBullet : MonoBehaviour
     private void Update()
     {
         holdTime -= Time.deltaTime;
+        boostTimeLeft -= Time.deltaTime;
         // work out rotation
         var curPos = _rigidbody2D.position;
         var direction = (Vector2)_camera.ScreenToWorldPoint(Input.mousePosition) - curPos;
@@ -143,33 +148,30 @@ public class PlayerBullet : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             holdTime = 0.5f;
-            if (curVelocityStep + 1 >= velocitySteps)
-            {
-                // play "maxed out" feedback here
+            // play boost feedback here
+            foreach (var effect in dashEffects) 
+            { 
+                effect.Fire();
             }
-            else
-            {
-                // play boost feedback here
-                foreach (var effect in dashEffects)
-                {
-                    effect.Fire();
-                }
-                
-                var spinAmt =  (_curVelocity / MaxVelocity) * 5.0f;
-                _cameraFollow.Shake(Interp.Erp(Interp.Type.InSquared, 0, 1.0f, _curVelocity / MaxVelocity), 0.5f, spinAmt);
-                
-                // adjust camera fov
-                UpdateCameraFov(true);
             
-                // update velocity
+            var spinAmt =  (_curVelocity / MaxVelocity) * 4.0f;
+            _cameraFollow.Shake(Interp.Erp(Interp.Type.InSquared, 0, 0.6f, _curVelocity / MaxVelocity), 0.5f, spinAmt);
+            
+            // adjust camera fov
+            if (curVelocityStep < velocitySteps - 1)
+            {
+                UpdateCameraFov(true);
                 curVelocityStep++;
                 _curVelocity = Interp.Erp(velocityScalingMethod, StartVelocity,
                     MaxVelocity, (float)curVelocityStep / (velocitySteps - 1));
-                print(_curVelocity);
             }
+            
+            // update velocity
+            boostTimeLeft = 0.5f;
+
         }
 
-        _rigidbody2D.velocity = _rigidbody2D.transform.right * _curVelocity;
+        _rigidbody2D.velocity = _rigidbody2D.transform.right * _curVelocity * ((boostTimeLeft > 0) ? boostRatio : 1.0f);
     }
 
     private void OnCollisionEnter2D(Collision2D col)
