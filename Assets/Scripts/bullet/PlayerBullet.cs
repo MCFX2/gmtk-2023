@@ -12,10 +12,10 @@ public class PlayerBullet : MonoBehaviour
 
     private float _curVelocity = 0.0f;
 
-    [Header("Movement Settings")]
-    [SerializeField] private float startVelocity = 1.0f;
+    // [Header("Movement Settings")]
+    [field: SerializeField] public float StartVelocity { get; private set; } = 1.0f;
     [SerializeField] private float velocityStep = 0.5f;
-    [SerializeField] private float maxVelocity = 5.0f;
+    [field: SerializeField] public float MaxVelocity { get; private set; } = 5.0f;
 
     [SerializeField] private float turnSpeed = 720.0f;
 
@@ -47,7 +47,7 @@ public class PlayerBullet : MonoBehaviour
         _camera.orthographicSize = baseFov;
         curFov = baseFov;
         
-        _curVelocity = startVelocity;
+        _curVelocity = StartVelocity;
     }
 
     private void UpdateCameraFov(bool increase)
@@ -59,7 +59,7 @@ public class PlayerBullet : MonoBehaviour
             
         var startFov = _camera.orthographicSize;
         var fovStepSize = (maxFov - baseFov) /
-            (maxVelocity - startVelocity) * velocityStep;
+            (MaxVelocity - StartVelocity) * velocityStep;
         var fovError = curFov - startFov;
         if (increase)
         {
@@ -107,7 +107,7 @@ public class PlayerBullet : MonoBehaviour
         // work out velocity
         if (Input.GetMouseButtonDown(0))
         {
-            if (_curVelocity >= maxVelocity)
+            if (_curVelocity >= MaxVelocity)
             {
                 // play "maxed out" feedback here
             }
@@ -119,14 +119,14 @@ public class PlayerBullet : MonoBehaviour
                 UpdateCameraFov(true);
             
                 // update velocity
-                _curVelocity = Mathf.Clamp(_curVelocity + velocityStep, startVelocity,
-                    maxVelocity);
+                _curVelocity = Mathf.Clamp(_curVelocity + velocityStep, StartVelocity,
+                    MaxVelocity);
             }
         }
 
         if (Input.GetMouseButtonDown(1))
         {
-            if (_curVelocity <= startVelocity)
+            if (_curVelocity <= StartVelocity)
             {
                 // play "already minimum speed" feedback here
             }
@@ -137,8 +137,8 @@ public class PlayerBullet : MonoBehaviour
 
                 // update velocity
                 _curVelocity = Mathf.Clamp(_curVelocity - velocityStep,
-                    startVelocity,
-                    maxVelocity);
+                    StartVelocity,
+                    MaxVelocity);
             }
         }
 

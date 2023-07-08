@@ -24,14 +24,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1574035049050823010}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5958247545234968926}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!212 &353357982310255162
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -163,7 +163,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.5}
+  m_Size: {x: 0.5, y: 0.3}
   m_EdgeRadius: 0
 --- !u!114 &8197808110563386774
 MonoBehaviour:
@@ -177,9 +177,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8580a76711ae194692befd72e18f369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startVelocity: 1
-  maxVelocity: 5
+  <StartVelocity>k__BackingField: 1
+  velocityStep: 0.5
+  <MaxVelocity>k__BackingField: 5
   turnSpeed: 720
+  baseFov: 5
+  maxFov: 15
+  fovScalingMethod: 0
+  fovTransitionTime: 0.5
   turnSnapTime: 2.5
 --- !u!50 &2919649655671584644
 Rigidbody2D:
@@ -204,7 +209,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
@@ -218,6 +223,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4233400445657800945}
   - component: {fileID: 5150562033396675982}
+  - component: {fileID: 362053851298541725}
   m_Layer: 0
   m_Name: bullet
   m_TagString: Untagged
@@ -232,14 +238,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9182858801302088400}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5958247545234968926}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!212 &5150562033396675982
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -292,3 +298,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &362053851298541725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9182858801302088400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44772422ead62cd40b27ba34567fbd16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseSpinTime: 6
+  maxSpinTime: 120
+  spinScalingMethod: 7
+  _sprites:
+  - {fileID: 21300000, guid: 1d6a3b5378f089f469e98f4b345c7d8d, type: 3}
+  - {fileID: 21300000, guid: b5c82786d72a8894c95a928d21bf608e, type: 3}
+  - {fileID: 21300000, guid: d03cfb72b652b5d488ee14ff2f5ce81f, type: 3}
+  - {fileID: 21300000, guid: 2e828bae9705ece44b2b53549f01da9c, type: 3}
+  - {fileID: 21300000, guid: 7fc6a92931bdf62498f2957f53d10c8e, type: 3}
+  - {fileID: 21300000, guid: fd8c9a30ef1f1e046b89e7fbe1e36306, type: 3}
+  - {fileID: 21300000, guid: 8c4adc6d159027747863e9fc781f749e, type: 3}
+  - {fileID: 21300000, guid: 2f11bf3532e89c042bc9f1f464df0c8d, type: 3}
+  - {fileID: 21300000, guid: 3362a0b51c8d57f41977dc99e5120d14, type: 3}
+  - {fileID: 21300000, guid: ddb7c8d570acd9448a550ca78a79b122, type: 3}
+  - {fileID: 21300000, guid: d2f0bb1d2d366e54aa433d36619b1af1, type: 3}
+  - {fileID: 21300000, guid: 0a63453ed35739345ae9d098c34abd5e, type: 3}
+  - {fileID: 21300000, guid: e0e401c204f5b074f85d982eeb626cfa, type: 3}
+  - {fileID: 21300000, guid: 995eceb32e067c340838d52a7d47bdd2, type: 3}
+  - {fileID: 21300000, guid: 12ef95a5b6f4911479598e2ab9277100, type: 3}
+  - {fileID: 21300000, guid: a6c8f9a123111534085df1b6b5391146, type: 3}
+  - {fileID: 21300000, guid: 3fd3e423650eed641ab1cc0309d06399, type: 3}
+  - {fileID: 21300000, guid: 1a64080d379321f47a2edc0c35922a4d, type: 3}
