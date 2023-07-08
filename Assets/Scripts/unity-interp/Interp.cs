@@ -132,6 +132,7 @@ public class Transition
         Fade,
         RotateZ,
         Wait,
+        Custom,
     }
 
     [SerializeField] public Style action;
@@ -149,6 +150,10 @@ public class Transition
 
     private float _timeElapsed;
 
+    // custom function that gets called each frame with the current expected amount
+    // only used when action type is Style.Custom
+    public Action<float> CustomAction;
+    
     public bool IsAnimating => _timeElapsed > 0;
 
     /// <summary>
@@ -242,6 +247,20 @@ public class Transition
                 while (_timeElapsed < time)
                 {
                     _timeElapsed += Time.deltaTime;
+                    yield return null;
+                }
+
+                break;
+            }
+
+            case Style.Custom:
+            {
+                CustomAction(0);
+                yield return null;
+                while (_timeElapsed < time)
+                {
+                    _timeElapsed += Time.deltaTime;
+                    CustomAction(Interp.Erp(interpolation, 0, amount, _timeElapsed / time));
                     yield return null;
                 }
 
