@@ -41,6 +41,9 @@ public class CameraFollow : MonoBehaviour
 
         // set position to average of previous positions
         var newPos = _previousPositions.Aggregate(Vector2.zero, (current, pos) => current + pos) / _previousPositions.Count;
-        transform.position = new Vector3(newPos.x, newPos.y, transform.position.z);
+        transform.position = new Vector3(
+            (newPos.x + transform.position.x) / 2, 
+            (newPos.y + transform.position.y) / 2, 
+            transform.position.z);
     }
 }

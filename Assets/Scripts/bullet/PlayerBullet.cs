@@ -39,6 +39,8 @@ public class PlayerBullet : MonoBehaviour
     [SerializeField] private float turnSnapTime = 2.5f;
     private float _timeSteering = 0.0f;
 
+    private int isTouching = 0;
+
     private void Awake()
     {
         _camera = Camera.main;
@@ -83,9 +85,19 @@ public class PlayerBullet : MonoBehaviour
         _fovCoroutine = StartCoroutine(action.Animate());
     }
 
+    private float realVelocity;
+    private Vector2 oldPosition;
+    private float holdTime = 0.0f;
+    private void FixedUpdate()
+    {
+        realVelocity = (oldPosition - _rigidbody2D.position).magnitude / Time.fixedDeltaTime;
+        oldPosition = _rigidbody2D.position;
+    }
+
     // Update is called once per frame
     private void Update()
     {
+        holdTime -= Time.deltaTime;
         // work out rotation
         var curPos = _rigidbody2D.position;
         var direction = (Vector2)_camera.ScreenToWorldPoint(Input.mousePosition) - curPos;
@@ -104,9 +116,28 @@ public class PlayerBullet : MonoBehaviour
             _rigidbody2D.MoveRotation(curAngle + Mathf.Sign(dAngle) * maxTurn);
         }
 
+        if (Input.GetMouseButtonDown(1) || (holdTime < 0.0f && _rigidbody2D.velocity.magnitude > realVelocity * 2))
+        {
+            if (_curVelocity <= StartVelocity)
+            {
+                // play "already minimum speed" feedback here
+            }
+            else
+            {
+                // play slowdown feedback here
+                UpdateCameraFov(false);
+
+                // update velocity
+                _curVelocity = Mathf.Clamp(_curVelocity - velocityStep,
+                    StartVelocity,
+                    MaxVelocity);
+            }
+        }
+        
         // work out velocity
         if (Input.GetMouseButtonDown(0))
         {
+            holdTime = 0.5f;
             if (_curVelocity >= MaxVelocity)
             {
                 // play "maxed out" feedback here
@@ -124,24 +155,21 @@ public class PlayerBullet : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(1))
-        {
-            if (_curVelocity <= StartVelocity)
-            {
-                // play "already minimum speed" feedback here
-            }
-            else
-            {
-                // play slowdown feedback here
-                UpdateCameraFov(false);
-
-                // update velocity
-                _curVelocity = Mathf.Clamp(_curVelocity - velocityStep,
-                    StartVelocity,
-                    MaxVelocity);
-            }
-        }
-
         _rigidbody2D.velocity = _rigidbody2D.transform.right * _curVelocity;
+    }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        isTouching++;
+        if (col.rigidbody.bodyType == RigidbodyType2D.Static)
+        { // todo: use a tag for this instead?
+            // play "hit wall" feedback here
+            
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        isTouching--;
     }
 }
