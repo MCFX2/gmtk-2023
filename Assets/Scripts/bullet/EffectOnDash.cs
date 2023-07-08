@@ -50,4 +50,10 @@ public class EffectOnDash : MonoBehaviour
         _spriteRenderer.enabled = true;
         totalTime = playTime;
     }
+
+    public void StopFire()
+    {
+        _spriteRenderer.enabled = false;
+        totalTime = 0;
+    }
 }

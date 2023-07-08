@@ -126,6 +126,14 @@ public class PlayerBullet : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1) || (holdTime < 0.0f && _rigidbody2D.velocity.magnitude > realVelocity * 2))
         {
+            // cancel dash, if applicable
+            boostTimeLeft = 0.0f;
+            _cameraFollow.StopShake();
+            foreach (var effect in dashEffects)
+            {
+                effect.StopFire();
+            }
+            
             if (curVelocityStep <= 0)
             {
                 // play "already minimum speed" feedback here

@@ -29,6 +29,11 @@ public class CameraFollow : MonoBehaviour
             curShakeRotAmt = spinAmt;
         }
     }
+
+    public void StopShake()
+    {
+        curShakeTime = 0;
+    }
     
     
     private void Awake()
