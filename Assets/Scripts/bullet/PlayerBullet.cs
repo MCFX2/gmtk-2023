@@ -155,7 +155,7 @@ public class PlayerBullet : MonoBehaviour
             }
             
             var spinAmt =  (_curVelocity / MaxVelocity) * 4.0f;
-            _cameraFollow.Shake(Interp.Erp(Interp.Type.InSquared, 0, 0.6f, _curVelocity / MaxVelocity), 0.5f, spinAmt);
+            _cameraFollow.Shake(Interp.Erp(Interp.Type.InSquared, 0, 0.2f, _curVelocity / MaxVelocity), 0.5f, spinAmt);
             
             // adjust camera fov
             if (curVelocityStep < velocitySteps - 1)

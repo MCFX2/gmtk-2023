@@ -103,7 +103,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1abd1f0205755954fa906ddc23bcb542, type: 3}
   - {fileID: 21300000, guid: f8731b3c22b567346b8d084525ca5cc4, type: 3}
   framerate: 10
-  playTime: 1
+  playTime: 0.5
 --- !u!1 &1574035049050823010
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,11 +283,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8580a76711ae194692befd72e18f369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashEffects: []
+  dashEffects:
+  - {fileID: 3587685485675735057}
   <StartVelocity>k__BackingField: 1
-  velocityStep: 1
+  velocitySteps: 8
+  velocityScalingMethod: 0
   <MaxVelocity>k__BackingField: 10
   turnSpeed: 720
+  boostRatio: 3
   baseFov: 4
   maxFov: 10
   fovScalingMethod: 0

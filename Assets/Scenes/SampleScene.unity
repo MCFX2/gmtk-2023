@@ -191,17 +191,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &202630144 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3587685485675735057, guid: 79b03f7bae55fd14eaf490111c9a0282, type: 3}
-  m_PrefabInstance: {fileID: 2099330107114074636}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ea5caf89ae84284ab9a4adb31c4c8e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &276957115 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5958247545234968926, guid: 79b03f7bae55fd14eaf490111c9a0282, type: 3}
@@ -1735,10 +1724,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3587685485675735057, guid: 79b03f7bae55fd14eaf490111c9a0282, type: 3}
-      propertyPath: playTime
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 5958247545234968926, guid: 79b03f7bae55fd14eaf490111c9a0282, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1783,18 +1768,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8197808110563386774, guid: 79b03f7bae55fd14eaf490111c9a0282, type: 3}
-      propertyPath: boostRatio
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8197808110563386774, guid: 79b03f7bae55fd14eaf490111c9a0282, type: 3}
-      propertyPath: dashEffects.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8197808110563386774, guid: 79b03f7bae55fd14eaf490111c9a0282, type: 3}
-      propertyPath: dashEffects.Array.data[0]
-      value: 
-      objectReference: {fileID: 202630144}
     - target: {fileID: 8490032829473315375, guid: 79b03f7bae55fd14eaf490111c9a0282, type: 3}
       propertyPath: m_Name
       value: PlayerBullet
