@@ -8,6 +8,7 @@ using UnityEngine;
 public class PlayerBullet : MonoBehaviour
 {
     private Camera _camera;
+    private CameraFollow _cameraFollow;
     private Rigidbody2D _rigidbody2D;
 
     private float _curVelocity = 0.0f;
@@ -16,7 +17,9 @@ public class PlayerBullet : MonoBehaviour
     
     // [Header("Movement Settings")]
     [field: SerializeField] public float StartVelocity { get; private set; } = 1.0f;
-    [SerializeField] private float velocityStep = 0.5f;
+    [SerializeField] private int velocitySteps = 8;
+    private int curVelocityStep = 0;
+    [SerializeField] private Interp.Type velocityScalingMethod = Interp.Type.Linear;
     [field: SerializeField] public float MaxVelocity { get; private set; } = 5.0f;
 
     [SerializeField] private float turnSpeed = 720.0f;
@@ -40,13 +43,12 @@ public class PlayerBullet : MonoBehaviour
     // this is also used to work out the acceleration curve for bullet steering
     [SerializeField] private float turnSnapTime = 2.5f;
     private float _timeSteering = 0.0f;
-
-    private int isTouching = 0;
-
+    
     private void Awake()
     {
         _camera = Camera.main;
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _cameraFollow = _camera.GetComponent<CameraFollow>();
 
         _camera.orthographicSize = baseFov;
         curFov = baseFov;
@@ -62,8 +64,7 @@ public class PlayerBullet : MonoBehaviour
         }
             
         var startFov = _camera.orthographicSize;
-        var fovStepSize = (maxFov - baseFov) /
-            (MaxVelocity - StartVelocity) * velocityStep;
+        var fovStepSize = (maxFov - baseFov) / velocitySteps;
         var fovError = curFov - startFov;
         if (increase)
         {
@@ -120,7 +121,7 @@ public class PlayerBullet : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1) || (holdTime < 0.0f && _rigidbody2D.velocity.magnitude > realVelocity * 2))
         {
-            if (_curVelocity <= StartVelocity)
+            if (curVelocityStep <= 0)
             {
                 // play "already minimum speed" feedback here
             }
@@ -129,10 +130,12 @@ public class PlayerBullet : MonoBehaviour
                 // play slowdown feedback here
                 UpdateCameraFov(false);
 
+                
+                
                 // update velocity
-                _curVelocity = Mathf.Clamp(_curVelocity - velocityStep,
-                    StartVelocity,
-                    MaxVelocity);
+                curVelocityStep--;
+                _curVelocity = Interp.Erp(velocityScalingMethod, StartVelocity,
+                    MaxVelocity, (float)curVelocityStep / (velocitySteps - 1));
             }
         }
         
@@ -140,7 +143,7 @@ public class PlayerBullet : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             holdTime = 0.5f;
-            if (_curVelocity >= MaxVelocity)
+            if (curVelocityStep + 1 >= velocitySteps)
             {
                 // play "maxed out" feedback here
             }
@@ -152,12 +155,17 @@ public class PlayerBullet : MonoBehaviour
                     effect.Fire();
                 }
                 
+                var spinAmt =  (_curVelocity / MaxVelocity) * 5.0f;
+                _cameraFollow.Shake(Interp.Erp(Interp.Type.InSquared, 0, 1.0f, _curVelocity / MaxVelocity), 0.5f, spinAmt);
+                
                 // adjust camera fov
                 UpdateCameraFov(true);
             
                 // update velocity
-                _curVelocity = Mathf.Clamp(_curVelocity + velocityStep, StartVelocity,
-                    MaxVelocity);
+                curVelocityStep++;
+                _curVelocity = Interp.Erp(velocityScalingMethod, StartVelocity,
+                    MaxVelocity, (float)curVelocityStep / (velocitySteps - 1));
+                print(_curVelocity);
             }
         }
 
@@ -166,7 +174,6 @@ public class PlayerBullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        isTouching++;
         if (col.rigidbody.bodyType == RigidbodyType2D.Static)
         { // todo: use a tag for this instead?
             // play "hit wall" feedback here
@@ -176,6 +183,6 @@ public class PlayerBullet : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D other)
     {
-        isTouching--;
+        
     }
 }

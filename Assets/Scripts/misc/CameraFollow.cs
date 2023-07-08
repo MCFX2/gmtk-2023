@@ -10,6 +10,25 @@ public class CameraFollow : MonoBehaviour
     
     private List<Vector2> _previousPositions = new();
     private List<float> _previousTimes = new();
+
+
+    private float curShakeAmt;
+    private float curShakeTime;
+    private Vector2 shakeDelta;
+    private float shakeRotDelta;
+    private float curShakeRotAmt;
+
+    [SerializeField] private Interp.Type shakeAlgorithm;
+
+    public void Shake(float amount, float time, float spinAmt)
+    {
+        if(curShakeAmt < amount)
+        {
+            curShakeAmt = amount;
+            curShakeTime = time;
+            curShakeRotAmt = spinAmt;
+        }
+    }
     
     
     private void Awake()
@@ -20,6 +39,11 @@ public class CameraFollow : MonoBehaviour
     
     private void LateUpdate()
     {
+        transform.position -= (Vector3)shakeDelta;
+        transform.Rotate(0, 0, -shakeRotDelta);
+        shakeDelta = Vector2.zero;
+        shakeRotDelta = 0;
+        
         _previousPositions.Add(target.position);
         _previousTimes.Add(0);
 
@@ -45,5 +69,33 @@ public class CameraFollow : MonoBehaviour
             (newPos.x + transform.position.x) / 2, 
             (newPos.y + transform.position.y) / 2, 
             transform.position.z);
+        
+        // shake
+        if (curShakeTime > 0)
+        {
+            curShakeTime -= Time.deltaTime;
+            var shakeX = Interp.Erp(shakeAlgorithm, 0, curShakeAmt, Random.value);
+            var shakeY = Interp.Erp(shakeAlgorithm, 0, curShakeAmt, Random.value);
+            shakeRotDelta = Interp.Erp(shakeAlgorithm, 0, curShakeRotAmt, Random.value);
+            if (Random.value > 0.5f)
+            {
+                shakeX *= -1;
+            }
+            if (Random.value > 0.5f)
+            {
+                shakeY *= -1;
+            }
+            if (Random.value > 0.5f)
+            {
+                shakeRotDelta *= -1;
+            }
+            shakeDelta = new Vector2(shakeX, shakeY);
+            transform.position += (Vector3)shakeDelta;
+            transform.Rotate(0, 0, shakeRotDelta);
+        }
+        else
+        {
+            curShakeAmt = 0;
+        }
     }
 }
