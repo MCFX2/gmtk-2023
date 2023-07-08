@@ -100,7 +100,7 @@ public class PlayerBullet : MonoBehaviour
         realVelocity = (oldPosition - _rigidbody2D.position).magnitude / Time.fixedDeltaTime;
         oldPosition = _rigidbody2D.position;
     }
-
+    
     // Update is called once per frame
     private void Update()
     {
@@ -180,6 +180,19 @@ public class PlayerBullet : MonoBehaviour
         { // todo: use a tag for this instead?
             // play "hit wall" feedback here
             
+        }
+
+        var obj = col.gameObject.GetComponent<InteractableObject>();
+        if (obj != null)
+        {
+            if (boostTimeLeft > 0)
+            {
+                obj.OnBoost();
+            }
+            else
+            {
+                obj.OnTouch();
+            }
         }
     }
 
