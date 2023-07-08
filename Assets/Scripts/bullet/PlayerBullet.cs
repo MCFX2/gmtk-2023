@@ -14,6 +14,9 @@ public class PlayerBullet : MonoBehaviour
     private float _curVelocity = 0.0f;
 
     [SerializeField] private List<EffectOnDash> dashEffects = new();
+
+    [SerializeField] private ParticleSystem slowParticles;
+    [SerializeField] private ParticleSystem dashParticles;
     
     // [Header("Movement Settings")]
     [field: SerializeField] public float StartVelocity { get; private set; } = 1.0f;
@@ -143,6 +146,7 @@ public class PlayerBullet : MonoBehaviour
                 // play slowdown feedback here
                 UpdateCameraFov(false);
 
+                slowParticles.Play();
                 
                 
                 // update velocity
@@ -164,6 +168,8 @@ public class PlayerBullet : MonoBehaviour
             
             var spinAmt =  (_curVelocity / MaxVelocity) * 4.0f;
             _cameraFollow.Shake(Interp.Erp(Interp.Type.InSquared, 0, 0.2f, _curVelocity / MaxVelocity), 0.5f, spinAmt);
+            
+            dashParticles.Play();
             
             // adjust camera fov
             if (curVelocityStep < velocitySteps - 1)
