@@ -28,10 +28,10 @@ public class William : MonoBehaviour, InteractableObject
     public void OnBoost()
     {
         if (!Killed)
-        {
+        { 
             Killed = true;
-             // award achievement
-             print("YEOWCH! YOU KILLED WILLIAM!");
+            // award achievement
+            AchievementSystem.AwardAchievement(willYellAchievement);
         }
     }
 }

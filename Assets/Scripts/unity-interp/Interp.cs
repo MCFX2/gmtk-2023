@@ -200,7 +200,6 @@ public class Transition
                     t.localPosition = oldPos;
                     yield return null;
                 }
-
                 break;
             }
             case Style.Fade:
@@ -303,7 +302,14 @@ public class TransitionList
             {
                 list[curIdx].target = self;
             }
+
             yield return list[curIdx].Animate();
+            //var status = list[curIdx].Animate();
+            //while (status.MoveNext())
+            // {
+            //    Debug.Log("hm");
+            //    yield return null;
+            //}
             list[curIdx].target = null;
             curIdx++;
         }
