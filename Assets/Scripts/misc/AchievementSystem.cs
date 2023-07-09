@@ -24,7 +24,7 @@ public class AchievementSystem : MonoBehaviour
         popup.SetActive(false);
     }
     
-    private List<AchievementObj> _earnedAchievements = new List<AchievementObj>();
+    private static readonly List<AchievementObj> EarnedAchievements = new();
     
     public delegate void AchievementUnlockEvent();
     
@@ -32,14 +32,14 @@ public class AchievementSystem : MonoBehaviour
 
     public static bool HasAchievement(AchievementObj achievement)
     {
-        return Instance._earnedAchievements.Contains(achievement);
+        return EarnedAchievements.Contains(achievement);
     }
 
     public static void AwardAchievement(AchievementObj achievement)
     {
         if (HasAchievement(achievement)) return;
         
-        Instance._earnedAchievements.Add(achievement);
+        EarnedAchievements.Add(achievement);
 
         OnAchievementUnlocked?.Invoke();
 
