@@ -72,7 +72,7 @@ public class AchieveHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         col.b = 1f;
         img.color = col;
         
-        if (title.text == achievement.title)
+        if (description.text == achievement.description)
         {
             descPanel.SetActive(false);
         }
