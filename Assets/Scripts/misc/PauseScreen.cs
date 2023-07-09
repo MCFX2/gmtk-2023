@@ -26,9 +26,15 @@ public class PauseScreen : MonoBehaviour
     
     private void Awake()
     {
-        resumeButton.onClick.AddListener(Unpause);
+        resumeButton.onClick.AddListener(() =>
+        {
+            AudioManager.Play("click2");
+            Unpause();
+        });
+        
         quitButton.onClick.AddListener(() =>
         {
+            AudioManager.Play("click2");
             Unpause();
             // todo: reload scene into title screen
             SceneManager.LoadScene("SampleScene");

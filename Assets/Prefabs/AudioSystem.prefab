@@ -150,3 +150,5 @@ MonoBehaviour:
     Name: achievement
   - Clip: {fileID: 8300000, guid: 48656d2a5642c224f94aabad936a7dd9, type: 3}
     Name: click
+  - Clip: {fileID: 8300000, guid: be95987940cc4d24e95e24949fa4fe37, type: 3}
+    Name: click2
