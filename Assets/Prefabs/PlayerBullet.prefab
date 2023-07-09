@@ -9867,7 +9867,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5958247545234968926
 Transform:
   m_ObjectHideFlags: 0
@@ -9886,7 +9886,7 @@ Transform:
   - {fileID: 2448786210389308808}
   - {fileID: 7892744488499170023}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &3366550720096935993
 BoxCollider2D:
@@ -9950,7 +9950,7 @@ MonoBehaviour:
   slowParticles: {fileID: 1778429744695556335}
   dashParticles: {fileID: 4299407888808590525}
   <StartVelocity>k__BackingField: 1
-  velocitySteps: 8
+  velocitySteps: 4
   velocityScalingMethod: 0
   <MaxVelocity>k__BackingField: 10
   turnSpeed: 720
