@@ -215,6 +215,22 @@ public class PlayerBullet : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        var obj = col.gameObject.GetComponent<InteractableObject>();
+        if (obj != null)
+        {
+            if (boostTimeLeft > 0)
+            {
+                obj.OnBoost();
+            }
+            else
+            {
+                obj.OnTouch();
+            }
+        }
+    }
+
     private void OnCollisionExit2D(Collision2D other)
     {
         
