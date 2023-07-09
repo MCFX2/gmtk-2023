@@ -21,6 +21,8 @@ public class PauseScreen : MonoBehaviour
     [SerializeField] private Transition backgroundHide;
     [SerializeField] private Transition titleShow;
     [SerializeField] private Transition titleHide;
+    [SerializeField] private Transition achievementShow;
+    [SerializeField] private Transition achievementHide;
     
     private void Awake()
     {
@@ -57,7 +59,8 @@ public class PauseScreen : MonoBehaviour
         coroutines.Add( new KeyValuePair<Transition, IEnumerator>(quitButtonShow, quitButtonShow.Animate(null, true)));
         coroutines.Add( new KeyValuePair<Transition, IEnumerator>(backgroundShow, backgroundShow.Animate(null, true)));
         coroutines.Add( new KeyValuePair<Transition, IEnumerator>(titleShow, titleShow.Animate(null, true)));
-        
+        coroutines.Add( new KeyValuePair<Transition, IEnumerator>(achievementShow, achievementShow.Animate(null, true)));
+
         foreach(var c in coroutines)
             StartCoroutine(c.Value);
 
@@ -88,6 +91,7 @@ public class PauseScreen : MonoBehaviour
         coroutines.Add( new KeyValuePair<Transition, IEnumerator>(quitButtonHide, quitButtonHide.Animate(null, true)));
         coroutines.Add( new KeyValuePair<Transition, IEnumerator>(backgroundHide, backgroundHide.Animate(null, true)));
         coroutines.Add( new KeyValuePair<Transition, IEnumerator>(titleHide, titleHide.Animate(null, true)));
+        coroutines.Add( new KeyValuePair<Transition, IEnumerator>(achievementHide, achievementHide.Animate(null, true)));
         
         foreach(var c in coroutines)
             StartCoroutine(c.Value);

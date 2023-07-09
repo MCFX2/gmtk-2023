@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Bird Flu
   m_EditorClassIdentifier: 
   thumbnail: {fileID: 0}
-  title: Bird Flu? Yeah They Do That
+  title: Bird Flu? They Do That
   description: Fly in formation with your newfound friends.
