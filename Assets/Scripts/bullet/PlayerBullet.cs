@@ -171,6 +171,8 @@ public class PlayerBullet : MonoBehaviour
             var spinAmt =  (_curVelocity / MaxVelocity) * 4.0f;
             _cameraFollow.Shake(Interp.Erp(Interp.Type.InSquared, 0, 0.2f, _curVelocity / MaxVelocity), 0.5f, spinAmt);
             
+            AudioManager.Play("crash2");
+            
             dashParticles.Play();
             
             // adjust camera fov
@@ -204,6 +206,7 @@ public class PlayerBullet : MonoBehaviour
             if (boostTimeLeft > 0)
             {
                 obj.OnBoost();
+                AudioManager.Play("crash1");
             }
             else
             {
