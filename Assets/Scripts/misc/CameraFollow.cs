@@ -44,6 +44,7 @@ public class CameraFollow : MonoBehaviour
     
     private void LateUpdate()
     {
+        if (Time.timeScale == 0) return;
         transform.position -= (Vector3)shakeDelta;
         transform.Rotate(0, 0, -shakeRotDelta);
         shakeDelta = Vector2.zero;

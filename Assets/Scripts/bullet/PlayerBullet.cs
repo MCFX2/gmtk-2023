@@ -107,6 +107,8 @@ public class PlayerBullet : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if(Time.timeScale == 0f) return;
+        
         holdTime -= Time.deltaTime;
         boostTimeLeft -= Time.deltaTime;
         // work out rotation

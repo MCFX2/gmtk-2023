@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 [Serializable]
 public static class Interp
@@ -130,6 +131,7 @@ public class Transition
         MoveX,
         MoveY,
         Fade,
+        FadeImage,
         RotateZ,
         Wait,
         Custom,
@@ -156,11 +158,16 @@ public class Transition
     
     public bool IsAnimating => _timeElapsed > 0;
 
+    public void ForceEnd()
+    {
+        _timeElapsed = time;
+    }
+
     /// <summary>
     /// Coroutine to animate this
     /// Calls onFinish on the frame the animation reaches its end
     /// </summary>
-    public IEnumerator Animate(Action onFinish = null)
+    public IEnumerator Animate(Action onFinish = null, bool timeAgnostic = false)
     {
         _timeElapsed = 0;
         switch (action)
@@ -171,9 +178,9 @@ public class Transition
                 var startPos = t.localPosition.x;
                 var endPos = startPos + amount;
                 yield return null;
-                while (_timeElapsed < time)
+                while (_timeElapsed <= time)
                 {
-                    _timeElapsed += Time.deltaTime;
+                    _timeElapsed += timeAgnostic ? Time.unscaledDeltaTime : Time.deltaTime;
                     var newPos = Interp.Erp(interpolation, startPos, endPos,
                         _timeElapsed / time);
                     var oldPos = t.localPosition;
@@ -190,9 +197,9 @@ public class Transition
                 var startPos = t.localPosition.y;
                 var endPos = startPos + amount;
                 yield return null;
-                while (_timeElapsed < time)
+                while (_timeElapsed <= time)
                 {
-                    _timeElapsed += Time.deltaTime;
+                    _timeElapsed += timeAgnostic ? Time.unscaledDeltaTime : Time.deltaTime;
                     var newPos = Interp.Erp(interpolation, startPos, endPos,
                         _timeElapsed / time);
                     var oldPos = t.localPosition;
@@ -208,9 +215,9 @@ public class Transition
                 var startAlpha = sp.color.a;
                 var endAlpha = startAlpha + amount;
                 yield return null;
-                while (_timeElapsed < time)
+                while (_timeElapsed <= time)
                 {
-                    _timeElapsed += Time.deltaTime;
+                    _timeElapsed += timeAgnostic ? Time.unscaledDeltaTime : Time.deltaTime;
                     var newAlpha = Interp.Erp(interpolation, startAlpha, endAlpha,
                         _timeElapsed / time);
                     var oldColor = sp.color;
@@ -220,15 +227,34 @@ public class Transition
                 }
                 break;
             }
+            case Style.FadeImage:
+            {
+                var im = target.GetComponent<Image>();
+                var startAlpha = im.color.a;
+                var endAlpha = startAlpha + amount;
+                yield return null;
+                while (_timeElapsed <= time)
+                {
+                    _timeElapsed += timeAgnostic ? Time.unscaledDeltaTime : Time.deltaTime;
+                    var newAlpha = Interp.Erp(interpolation, startAlpha, endAlpha,
+                        _timeElapsed / time);
+                    var oldColor = im.color;
+                    oldColor.a = newAlpha;
+                    im.color = oldColor;
+                    yield return null;
+                }
+
+                break;
+            }
             case Style.RotateZ:
             {
                 var t = target.transform;
                 var startRot = t.localRotation.eulerAngles.z;
                 var endRot = startRot + amount;
                 yield return null;
-                while (_timeElapsed < time)
+                while (_timeElapsed <= time)
                 {
-                    _timeElapsed += Time.deltaTime;
+                    _timeElapsed += timeAgnostic ? Time.unscaledDeltaTime : Time.deltaTime;
                     var newRot = Interp.Erp(interpolation, startRot, endRot,
                         _timeElapsed / time);
                     var oldRot = t.localRotation;
@@ -243,9 +269,9 @@ public class Transition
             case Style.Wait:
             {
                 yield return null;
-                while (_timeElapsed < time)
+                while (_timeElapsed <= time)
                 {
-                    _timeElapsed += Time.deltaTime;
+                    _timeElapsed += timeAgnostic ? Time.unscaledDeltaTime : Time.deltaTime;
                     yield return null;
                 }
 
@@ -256,9 +282,9 @@ public class Transition
             {
                 CustomAction(0);
                 yield return null;
-                while (_timeElapsed < time)
+                while (_timeElapsed <= time)
                 {
-                    _timeElapsed += Time.deltaTime;
+                    _timeElapsed += timeAgnostic ? Time.unscaledDeltaTime : Time.deltaTime;
                     CustomAction(Interp.Erp(interpolation, 0, amount, _timeElapsed / time));
                     yield return null;
                 }
