@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 640c1162d1ce1314eae1cbf10a8f01f9, type: 3}
   m_Name: Balloons
   m_EditorClassIdentifier: 
-  thumbnail: {fileID: 0}
+  thumbnail: {fileID: 21300000, guid: a2daa4a1102b5444f85089bc7927beca, type: 3}
   title: Birthday Hater
   description: Pop all 10 defenseless balloons.

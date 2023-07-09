@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 640c1162d1ce1314eae1cbf10a8f01f9, type: 3}
   m_Name: Bird Flu
   m_EditorClassIdentifier: 
-  thumbnail: {fileID: 0}
+  thumbnail: {fileID: 21300000, guid: af71f027b2d7c564da97d403aca9e01c, type: 3}
   title: Bird Flu? They Do That
   description: Fly in formation with your newfound friends.

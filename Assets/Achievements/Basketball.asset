@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 640c1162d1ce1314eae1cbf10a8f01f9, type: 3}
   m_Name: Basketball
   m_EditorClassIdentifier: 
-  thumbnail: {fileID: 0}
+  thumbnail: {fileID: 21300000, guid: 69e312c0779a4934caa3d917edde8b14, type: 3}
   title: Rimshot
   description: He shoots, he scores!

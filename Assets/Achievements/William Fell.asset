@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 640c1162d1ce1314eae1cbf10a8f01f9, type: 3}
   m_Name: William Fell
   m_EditorClassIdentifier: 
-  thumbnail: {fileID: 0}
+  thumbnail: {fileID: 21300000, guid: 8afd510a88d55f24caca0ea969fd5475, type: 3}
   title: William Fell
   description: Prove your marksmanship (extremely nonviolently).

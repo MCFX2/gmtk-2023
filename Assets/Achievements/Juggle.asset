@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 640c1162d1ce1314eae1cbf10a8f01f9, type: 3}
   m_Name: Juggle
   m_EditorClassIdentifier: 
-  thumbnail: {fileID: 0}
+  thumbnail: {fileID: 21300000, guid: 7b372473a9d9d394395d6dc6713e4c8f, type: 3}
   title: Jugglenaut
   description: Prove your juggling skills by keeping a ball in the air for three
     hits in a row.

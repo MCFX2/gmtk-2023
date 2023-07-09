@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 640c1162d1ce1314eae1cbf10a8f01f9, type: 3}
   m_Name: Hotdog
   m_EditorClassIdentifier: 
-  thumbnail: {fileID: 0}
+  thumbnail: {fileID: 21300000, guid: cd5a195381047fa47b795262ac5e7243, type: 3}
   title: Full Bread-al Jacket
   description: Become a tasty treat that can't be beat.
