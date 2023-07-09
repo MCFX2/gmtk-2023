@@ -23,9 +23,26 @@ public class AchievementSystem : MonoBehaviour
         popup = Instantiate(Instance.achievementPrefab, Instance.transform);
         popup.SetActive(false);
     }
+    
+    private List<AchievementObj> _earnedAchievements = new List<AchievementObj>();
+    
+    public delegate void AchievementUnlockEvent();
+    
+    public static event AchievementUnlockEvent OnAchievementUnlocked;
+
+    public static bool HasAchievement(AchievementObj achievement)
+    {
+        return Instance._earnedAchievements.Contains(achievement);
+    }
 
     public static void AwardAchievement(AchievementObj achievement)
     {
+        if (HasAchievement(achievement)) return;
+        
+        Instance._earnedAchievements.Add(achievement);
+
+        OnAchievementUnlocked?.Invoke();
+
         Instance.popup.SetActive(true);
 
         var tr = Instance.popup.GetComponent<RectTransform>();
@@ -35,5 +52,6 @@ public class AchievementSystem : MonoBehaviour
         tr.GetChild(1).GetComponent<Image>().sprite = achievement.thumbnail;
 
         Instance.StartCoroutine(Instance.animations.Play(Instance.popup, () => Instance.popup.SetActive(false)));
+        
     }
 }
