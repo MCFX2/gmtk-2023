@@ -11,9 +11,17 @@ public class William : MonoBehaviour, InteractableObject
 
     public static bool Killed { get; private set; } = false;
 
+    Animator animator;
+
     private void Awake()
     {
         Instance = this;
+    }
+
+    public void Start()
+    {
+        animator = GetComponent<Animator>();
+        animator.speed = 0.2f;
     }
     
     public void OnTouch()
