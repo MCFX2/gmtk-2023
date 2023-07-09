@@ -8,6 +8,7 @@ public class William : MonoBehaviour, InteractableObject
     public static William Instance;
     
     [SerializeField] private AchievementObj willYellAchievement;
+    [SerializeField] private AchievementObj willFellAchievement;
 
     public static bool Killed { get; private set; } = false;
 
@@ -28,9 +29,7 @@ public class William : MonoBehaviour, InteractableObject
     {
         if (!Killed)
         {
-            Killed = true;
-            
-            AchievementSystem.AwardAchievement(willYellAchievement);
+            AchievementSystem.AwardAchievement(willFellAchievement);
         }
     }
     
