@@ -2124,6 +2124,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: hoops
       objectReference: {fileID: 0}
+    - target: {fileID: 6524453108502856197, guid: 36d11f812a163c71b8c504489621b244, type: 3}
+      propertyPath: ball
+      value: 
+      objectReference: {fileID: 710491249}
     - target: {fileID: 6791078282647529374, guid: 36d11f812a163c71b8c504489621b244, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -2790,6 +2794,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &710491249 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1175776145229966900, guid: 8c714a3c1a322dbe283a070e2699e612, type: 3}
+  m_PrefabInstance: {fileID: 1874350305}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &760289579
 GameObject:
   m_ObjectHideFlags: 0
