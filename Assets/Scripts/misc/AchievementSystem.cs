@@ -34,7 +34,7 @@ public class AchievementSystem : MonoBehaviour
     {
         return EarnedAchievements.Contains(achievement);
     }
-
+    
     public static void AwardAchievement(AchievementObj achievement)
     {
         if (HasAchievement(achievement)) return;
@@ -42,6 +42,8 @@ public class AchievementSystem : MonoBehaviour
         EarnedAchievements.Add(achievement);
 
         OnAchievementUnlocked?.Invoke();
+        
+        AudioManager.Play("achievement");
 
         Instance.popup.SetActive(true);
 

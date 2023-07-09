@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class AchieveHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -12,9 +13,11 @@ public class AchieveHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [SerializeField] private GameObject descPanel;
     [SerializeField] private TextMeshProUGUI title;
     [SerializeField] private TextMeshProUGUI description;
+
+    private Image img;
     private void Awake()
     {
-        var img = GetComponent<UnityEngine.UI.Image>();
+        img = GetComponent<Image>();
         img.sprite = achievement.thumbnail;
 
         var col = img.color;
@@ -33,7 +36,6 @@ public class AchieveHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         if (AchievementSystem.HasAchievement(achievement))
         { 
-            var img = GetComponent<UnityEngine.UI.Image>();
             var col = img.color;
             col.a = 1.0f;
             img.color = col;
@@ -52,10 +54,24 @@ public class AchieveHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             title.text = "???";
         }
         description.text = achievement.description;
+        
+        var col = img.color;
+        col.r = 0.7f;
+        col.g = 0.7f;
+        col.b = 0.7f;
+        img.color = col;
+        
+        AudioManager.Play("click");
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        var col = img.color;
+        col.r = 1f;
+        col.g = 1f;
+        col.b = 1f;
+        img.color = col;
+        
         if (title.text == achievement.title)
         {
             descPanel.SetActive(false);

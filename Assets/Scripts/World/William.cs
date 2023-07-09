@@ -29,7 +29,8 @@ public class William : MonoBehaviour, InteractableObject
         if (!Killed)
         {
             Killed = true;
-            // award achievement
+            
+            AchievementSystem.AwardAchievement(willYellAchievement);
         }
     }
     

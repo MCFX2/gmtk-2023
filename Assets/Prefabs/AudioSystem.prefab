@@ -144,5 +144,9 @@ MonoBehaviour:
   _audioEntries:
   - Clip: {fileID: 8300000, guid: cd702503e19cf3f4bb62500506476785, type: 3}
     Name: Crash1
-  - Clip: {fileID: 8300000, guid: ab2f66354ac8046499dc190f976513b4, type: 3}
+  - Clip: {fileID: 8300000, guid: 60b4d902b4d68e14c89003a999bd54bf, type: 3}
     Name: Crash2
+  - Clip: {fileID: 8300000, guid: 77b4fa3ec4e2b704ca29456ffcec4628, type: 3}
+    Name: achievement
+  - Clip: {fileID: 8300000, guid: 48656d2a5642c224f94aabad936a7dd9, type: 3}
+    Name: click
